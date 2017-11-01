@@ -1,0 +1,19 @@
+{
+  "name": "legendastv-cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "change-case": "^3.0.1",
+    "cheerio": "^1.0.0-rc.2",
+    "cookie": "^0.3.1",
+    "isomorphic-fetch": "^2.2.1",
+    "normalize-uri": "^1.1.0"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1"
+  }
+}
