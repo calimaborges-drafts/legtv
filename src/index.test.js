@@ -23,13 +23,16 @@ describe("legendas tv unofficial api", () => {
     );
 
     expect(authCookie).toBeTruthy();
-    const response = await downloadFromLegendasTv(
+    const filePath = await downloadFromLegendasTv(
       authCookie,
       "downloadarquivo/59ee3f6e88cee"
     );
 
+    const fs = require("fs-extra");
+    const fileStat = await fs.stat(filePath);
+
     const fileSize = 17386;
-    expect(response.length).toBe(fileSize);
+    expect(fileStat.size).toBe(fileSize);
   });
 
   it("should list available subtitles inside .rar file", async () => {

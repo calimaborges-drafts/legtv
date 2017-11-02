@@ -2,7 +2,8 @@ const http = require("http");
 const fetch = require("isomorphic-fetch");
 const normalizeUri = require("normalize-uri");
 const cheerio = require("cheerio");
-const tmp = require("tmp");
+const tmp = require("tmp-promise");
+const fs = require("fs-extra");
 
 const { rar } = require("./rar-wrapper");
 
@@ -63,23 +64,12 @@ const downloadFromLegendasTv = async (authCookie, path) => {
     }
   });
 
-  return new Promise((resolve, reject) => {
-    let chunks = [];
-    let bytes = 0;
+  const fileBuffer = await response.buffer();
+  const tempFile = await tmp.file();
+  const tempPath = tempFile.path;
+  await fs.writeFile(tempPath, fileBuffer);
 
-    response.body.on("error", err => {
-      reject(err);
-    });
-
-    response.body.on("data", chunk => {
-      chunks.push(chunk);
-      bytes += chunk.length;
-    });
-
-    response.body.on("end", () => {
-      resolve(Buffer.concat(chunks));
-    });
-  });
+  return tempPath;
 };
 
 const listSubtitlesFromRarFile = async path => {
