@@ -31,4 +31,22 @@ describe("legendas tv unofficial api", () => {
     const fileSize = 17386;
     expect(response.length).toBe(fileSize);
   });
+
+  it("should list available subtitles inside .rar file", async () => {
+    const { listSubtitlesFromRarFile } = require("./");
+    const fs = require("fs-extra");
+
+    const files = await listSubtitlesFromRarFile(
+      `${__dirname}/../test_files/legendas_tv_20171023171351000000.rar`
+    );
+
+    expect(files).toEqual(
+      expect.arrayContaining([
+        "The.Walking.Dead.S08E01.Mercy.720p.AMZN.WEBRip.DDP5.1.x264.srt",
+        "The.Walking.Dead.S08E01.Mercy.1080p.AMZN.WEBRip.DDP5.1.x264.srt"
+      ])
+    );
+
+    expect(files).not.toContain("Legendas.tv.url");
+  });
 });

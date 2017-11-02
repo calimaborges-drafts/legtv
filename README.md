@@ -1,5 +1,7 @@
 # legendastv-cli
 
+[![Build Status](https://travis-ci.org/calimaborges/legendastv-cli.svg?branch=master)](https://travis-ci.org/calimaborges/legendastv-cli)
+
 Unofficial Legendas TV CLI.
 
 ## Build

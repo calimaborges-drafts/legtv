@@ -2,6 +2,9 @@ const http = require("http");
 const fetch = require("isomorphic-fetch");
 const normalizeUri = require("normalize-uri");
 const cheerio = require("cheerio");
+const tmp = require("tmp");
+
+const { rar } = require("./rar-wrapper");
 
 const legendasTvProtocol = "http";
 const legendasTvHost = "legendas.tv";
@@ -79,8 +82,14 @@ const downloadFromLegendasTv = async (authCookie, path) => {
   });
 };
 
+const listSubtitlesFromRarFile = async path => {
+  const archive = await rar(path);
+  return archive.list().filter(file => file.endsWith(".srt"));
+};
+
 module.exports = {
   loginLegendasTv,
   searchLegendasTv,
-  downloadFromLegendasTv
+  downloadFromLegendasTv,
+  listSubtitlesFromRarFile
 };
