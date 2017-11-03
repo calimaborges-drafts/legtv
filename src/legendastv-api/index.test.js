@@ -34,7 +34,7 @@ describe("legendas tv unofficial api", () => {
     const fs = require("fs-extra");
 
     const files = await listSubtitlesFromRarFile(
-      `${__dirname}/../test_files/legendas_tv_20171023171351000000.rar`
+      `${__dirname}/../../test_files/legendas_tv_20171023171351000000.rar`
     );
 
     expect(files).toEqual(
