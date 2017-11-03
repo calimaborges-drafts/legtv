@@ -4,6 +4,7 @@ const normalizeUri = require("normalize-uri");
 const cheerio = require("cheerio");
 const tmp = require("tmp-promise");
 const fs = require("fs-extra");
+const Promise = require("bluebird");
 
 const { rar } = require("./rar-wrapper");
 
@@ -43,19 +44,23 @@ const searchLegendasTv = async query => {
   const text = await response.text();
   const html = cheerio.load(text);
 
-  const returnedLinks = html("article a")
+  return html("article a")
     .map(function(i, el) {
       return html(this).attr("href");
     })
-    .filter((i, href) => href.indexOf("download") !== -1)
-    .get();
-
-  const topLinks = returnedLinks.slice(0, 3);
-  return topLinks;
+    .get()
+    .filter(href => href.indexOf("download") !== -1)
+    .map(link => {
+      const matchedLink = link.match(/\/download\/([a-z0-9]+)\/.*/);
+      if (!matchedLink) return null;
+      else return matchedLink[1];
+    })
+    .filter(id => id !== null)
+    .slice(0, 3);
 };
 
-const downloadFromLegendasTv = async (authCookie, path) => {
-  const url = `${legendasTvProtocol}://${legendasTvHost}/${path}`;
+const downloadFromLegendasTv = async (authCookie, id) => {
+  const url = `${legendasTvProtocol}://${legendasTvHost}/downloadarquivo/${id}`;
   const response = await fetch(url, {
     headers: {
       ["user-agent"]:
@@ -68,7 +73,6 @@ const downloadFromLegendasTv = async (authCookie, path) => {
   const tempFile = await tmp.file();
   const tempPath = tempFile.path;
   await fs.writeFile(tempPath, fileBuffer);
-
   return tempPath;
 };
 
@@ -77,9 +81,31 @@ const listSubtitlesFromRarFile = async path => {
   return archive.list().filter(file => file.endsWith(".srt"));
 };
 
+const querySubtitlesFromLegendasTv = async (username, password, query) => {
+  const authCookie = await loginLegendasTv(username, password);
+  const topLinks = await searchLegendasTv(query);
+
+  return await Promise.reduce(
+    topLinks,
+    async (listOfSubtitles, link) => {
+      const filePath = await downloadFromLegendasTv(authCookie, link);
+      const currentSubtitleFiles = await listSubtitlesFromRarFile(filePath);
+      return [
+        ...listOfSubtitles,
+        ...currentSubtitleFiles.map(subtitleFile => ({
+          name: subtitleFile,
+          container: filePath
+        }))
+      ];
+    },
+    []
+  );
+};
+
 module.exports = {
   loginLegendasTv,
   searchLegendasTv,
   downloadFromLegendasTv,
+  querySubtitlesFromLegendasTv,
   listSubtitlesFromRarFile
 };
