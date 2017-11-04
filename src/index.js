@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const program = require("commander");
 const { red } = require("chalk");
 const ora = require("ora");
+const { score } = require("fuzzaldrin");
 
 const { version } = require("../package.json");
 const {
@@ -37,6 +38,7 @@ const askWhichFiles = async choices => {
 };
 
 const doMyThing = async query => {
+  const minimumScore = 0.095;
   const { username, password } = await askForUsernameAndPassword();
   const spinner = ora("Authenticating").start();
   const authCookie = await loginLegendasTv(username, password);
@@ -44,9 +46,13 @@ const doMyThing = async query => {
   const ids = await searchLegendasTv(query);
   spinner.text = `Extracting results for "${query}"`;
   const files = await listUnpackedFiles(authCookie, ids);
+  spinner.text = `Filtering extracted results for "${query}"`;
+  const filteredFiles = files.filter(
+    file => score(file.name, query) > minimumScore
+  );
   spinner.stop();
-  const filesAnswer = await askWhichFiles(files);
-  console.log(filesAnswer);
+  if (filteredFiles.length === 0) throw new Error("no subtitles found");
+  const filesAnswer = await askWhichFiles(filteredFiles);
 };
 
 const main = async query => {
