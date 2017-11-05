@@ -1,8 +1,9 @@
 {
   "name": "legendastv-cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "bin": "./index.js",
   "scripts": {
     "start": "node src/index.js",
     "test": "jest"
@@ -13,7 +14,6 @@
     "cheerio": "^1.0.0-rc.2",
     "commander": "^2.11.0",
     "fs-extra": "^4.0.2",
-    "fuzzaldrin": "^2.1.0",
     "inquirer": "^3.3.0",
     "isomorphic-fetch": "^2.2.1",
     "normalize-uri": "^1.1.0",
@@ -21,6 +21,7 @@
     "tmp-promise": "^1.0.3"
   },
   "devDependencies": {
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "pkg": "^4.2.6"
   }
 }
