@@ -8,8 +8,7 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "jest",
-    "build": "pkg . --output releases/legtv",
-    "release": "np"
+    "build": "pkg . --output releases/legtv"
   },
   "dependencies": {
     "@fknop/node-unrar": "^1.1.0",

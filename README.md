@@ -1,8 +1,8 @@
 # legtv
-
 [![Build Status](https://travis-ci.org/calimaborges/legtv.svg?branch=master)](https://travis-ci.org/calimaborges/legtv)
 
 Unofficial Legendas TV CLI.
+
 
 ## Development run
 
@@ -28,5 +28,5 @@ LEGENDAS_TV_USERNAME=<username> LEGENDAS_TV_PASSWORD=<password> yarn test
 ## Release
 
 ```bash
-npm version minor | major | patch && npm release
+npm version minor | major | patch && npm publish
 ```
