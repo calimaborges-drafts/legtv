@@ -3,6 +3,8 @@
 
 Unofficial Legendas TV CLI.
 
+![legtv demo](docs/demo.gif)
+
 ## Installation
 
 * Go to https://github.com/calimaborges/legtv/releases/latest
