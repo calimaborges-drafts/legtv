@@ -7,6 +7,7 @@ Unofficial Legendas TV CLI.
 
 * Go to https://github.com/calimaborges/legtv/releases/latest
 * Download the CLI for your OS
+* Download `unrar.node` and place it in the same folder
 * Use like any other CLI executable
 
 ## Usage

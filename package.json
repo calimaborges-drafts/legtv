@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "jest",
-    "build": "pkg src/index.js --targets linux,macos,win --output releases/legtv",
+    "build": "pkg src/index.js --targets linux,macos,win --output releases/legtv && shx cp ./node_modules/@fknop/node-unrar/build/Release/node-unrar.node releases",
     "release": "release"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
   "devDependencies": {
     "jest": "^21.2.1",
     "pkg": "^4.2.6",
-    "release": "^2.5.4"
+    "release": "^2.5.4",
+    "shx": "^0.2.2"
   }
 }
