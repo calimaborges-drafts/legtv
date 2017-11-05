@@ -1,11 +1,3 @@
 language: node_js
 node_js:
 - '8'
-before_deploy: yarn build
-deploy:
-  provider: releases
-  api_key:
-    secure: T7MD0dg2+bGjO2vp0tcO2TLybeXbKb/UX8P+j2ZQ9XDNZdN3S81htXrOZklvUC9D1f30W+P4sdXMYw39/wyPjOCwANn1CYkkvEqxhfnTKdLEZ64fpksdgeRXV3EQFLlXmAIpcgRvGqukS6+h+yH55cCXksBJnwL2xP+BUmWJS6ypxRdamHlpnd6c4x1u5pvlGpV335vW87ypxkGRvkp9XQFiBQBvtym6hPrnOIgxQckyj2cPr2O6nS19OmxDkRB8MyNJbhAMj7z5jDrLVN4HY4gJhtsIBT6UkEfOFkeFIUMMe1zB1ForZbOFMORJy7MiwthlZhVfjxjitI3z63xJsROhbZxd0cMihiVCn/GFL6ls+JF91xD4MI2e8BhY9JWODqReY+M0mOSk1HDgRsofrx4WvFOrMTrTugZgx4KogW3EomMtqad7D/uEi8EUaC5gacKAZ5mb+YJBHNALqYuv9iAbFP4egqvM+Vz0T53MpJT47P6us42XmoKBbJkMlqiwcjwcCct0aNj1NrmyWCUNcmrFJEW1WoPZVUkbPkkkF5e5uvUq1+uMdgTnjiRgSje8VsNs5+EPukb8iv7YgqdDgjuPE8z4mBtDyUoXMO0aOKf/RiYZKtDTNdmeYXyyG+ol+WhCD9xV7ItDI1XlV7suaov6Im++4yDUgMYc+bt6RTQ=
-  file: releases/legtv
-  on:
-    repo: calimaborges/legtv
