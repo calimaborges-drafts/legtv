@@ -1,4 +1,4 @@
-# legendastv-cli
+# legtv
 
 [![Build Status](https://travis-ci.org/calimaborges/legendastv-cli.svg?branch=master)](https://travis-ci.org/calimaborges/legendastv-cli)
 
@@ -23,4 +23,10 @@ An executable will be built inside `releases` folder. Run with `releases/legtv "
 
 ```bash
 LEGENDAS_TV_USERNAME=<username> LEGENDAS_TV_PASSWORD=<password> yarn test
+```
+
+## Release
+
+```bash
+np
 ```
