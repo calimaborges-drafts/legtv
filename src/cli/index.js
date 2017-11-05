@@ -4,8 +4,8 @@ const { red } = require("chalk");
 const ora = require("ora");
 // const { score } = require("fuzzaldrin");
 
-const { version } = require("../package.json");
-const { login } = require("./legendastv-api");
+const { version } = require("../../package.json");
+const { login, search, download, extractSubtitles } = require("../legendastv");
 
 const askForUsernameAndPassword = async () => {
   const usernameAndPasswordQuestions = [
@@ -24,18 +24,23 @@ const askForUsernameAndPassword = async () => {
   return inquirer.prompt(usernameAndPasswordQuestions);
 };
 
-const collectDataAndOutputSubtitles = async () => {
+const collectDataAndOutputSubtitles = async query => {
   const { username, password } = await askForUsernameAndPassword();
   const spinner = ora("Authenticating").start();
-  const authCookie = await login(username, password);
-  spinner.text = `Searching for "${query}"`;
-  const ids = await search(query);
-  spinner.text = `Downloading subtitle RAR files`;
-  const downloadedFilePaths = await downloadFilesById(authCookie, ids);
-  spinner.text = `Extracting RAR files`;
-  const files = await extractSubtitlesFromRarFiles(downloadedFilePaths, ".");
-  spinner.stop();
-  console.log("Done! :-)");
+  try {
+    const authCookie = await login(username, password);
+    spinner.text = `Searching for "${query}"`;
+    const ids = await search(query);
+    spinner.text = `Downloading subtitle RAR files`;
+    const downloadedFilePaths = await download(authCookie, ...ids);
+    spinner.text = `Extracting RAR files`;
+    const files = await extractSubtitles(".", ...downloadedFilePaths);
+    spinner.stop();
+    console.log("Done! :-)");
+  } catch (err) {
+    spinner.stop();
+    console.error(err);
+  }
 };
 
 const startCli = async () => {
