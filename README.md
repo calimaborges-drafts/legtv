@@ -28,5 +28,5 @@ LEGENDAS_TV_USERNAME=<username> LEGENDAS_TV_PASSWORD=<password> yarn test
 ## Release
 
 ```bash
-npm version patch | minor | major && npm publish && git push --tags && yarn release
+npm version patch | minor | major && npm publish && git push && git push --tags && yarn release
 ```
