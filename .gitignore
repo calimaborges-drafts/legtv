@@ -4,3 +4,4 @@ coverage
 .vscode
 *.srt
 releases
+yarn-error.log

@@ -1,6 +1,7 @@
 {
   "name": "legtv",
-  "version": "0.1.2",
+  "description": " Unofficial legendas.tv command-line interface",
+  "version": "0.1.3",
   "main": "index.js",
   "license": "MIT",
   "bin": "src/index.js",
@@ -24,7 +25,6 @@
   },
   "devDependencies": {
     "jest": "^21.2.1",
-    "np": "^2.16.1",
     "pkg": "^4.2.6"
   }
 }
