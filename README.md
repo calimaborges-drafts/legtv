@@ -28,5 +28,5 @@ LEGENDAS_TV_USERNAME=<username> LEGENDAS_TV_PASSWORD=<password> yarn test
 ## Release
 
 ```bash
-np
+LEGENDAS_TV_USERNAME=<username> LEGENDAS_TV_PASSWORD=<password> yarn release
 ```
