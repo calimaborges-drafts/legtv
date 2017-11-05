@@ -2,7 +2,6 @@ const inquirer = require("inquirer");
 const program = require("commander");
 const { red } = require("chalk");
 const ora = require("ora");
-// const { score } = require("fuzzaldrin");
 
 const { version } = require("../../package.json");
 const { login, search, download, extractSubtitles } = require("../legendastv");
@@ -40,6 +39,7 @@ const collectDataAndOutputSubtitles = async query => {
   } catch (err) {
     spinner.stop();
     console.error(err);
+    throw err;
   }
 };
 
