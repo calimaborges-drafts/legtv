@@ -1,15 +1,14 @@
 {
   "name": "legtv",
   "description": " Unofficial legendas.tv command-line interface",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "src/legendastv/index.js",
   "license": "MIT",
   "bin": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
     "test": "jest",
-    "build":
-      "pkg src/index.js --targets linux,macos,win --output releases/legtv",
+    "build": "pkg src/index.js --targets linux,macos,win --output releases/legtv",
     "release": "release"
   },
   "dependencies": {
