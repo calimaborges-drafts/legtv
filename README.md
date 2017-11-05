@@ -3,6 +3,17 @@
 
 Unofficial Legendas TV CLI.
 
+## Installation
+
+* Go to https://github.com/calimaborges/legtv/releases/latest
+* Download the CLI for your OS
+* Use like any other CLI executable
+
+## Usage
+
+```
+legtv "the walking dead"
+```
 
 ## Development run
 
