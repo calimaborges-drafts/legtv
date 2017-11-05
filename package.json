@@ -1,12 +1,13 @@
 {
-  "name": "legendastv-cli",
+  "name": "legtv",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
-  "bin": "./index.js",
+  "bin": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "jest"
+    "test": "jest",
+    "build": "pkg . --output releases/legtv"
   },
   "dependencies": {
     "@fknop/node-unrar": "^1.1.0",
